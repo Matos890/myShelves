@@ -9,7 +9,9 @@ import {
 import { useList } from "./ListContext";
 const BookContext = createContext();
 
-const apiKey = `AIzaSyADchramyQEI5GUwGMsK-N48t3uDCumqOM`;
+// const apiKey = `AIzaSyADchramyQEI5GUwGMsK-N48t3uDCumqOM`;
+const apiKey = import.meta.env.VITE_API_KEY;
+console.log('ciao api',apiKey)
 const url = `https://www.googleapis.com/books/v1/volumes?q=`;
 const urlISBN = `https://www.googleapis.com/books/v1/volumes?q=isbn:`;
 const urlId = `https://www.googleapis.com/books/v1/volumes/`;
@@ -33,7 +35,7 @@ function reducer(state, action) {
     case "book/find":
       return { ...state, isLoading: false, currentBook: action.payload };
     case "set/read":
-      return {...state, read:true}
+      return { ...state, read: true };
     case "rejected":
       return { ...state, isLoading: false, error: action.payload };
     default:
@@ -180,7 +182,15 @@ function BookProvider({ children }) {
 
   return (
     <BookContext.Provider
-      value={{ books, isLoading, currentBook, error, getBooks, findBookInfo, findAuthorInfo }}
+      value={{
+        books,
+        isLoading,
+        currentBook,
+        error,
+        getBooks,
+        findBookInfo,
+        findAuthorInfo,
+      }}
     >
       {children}
     </BookContext.Provider>
