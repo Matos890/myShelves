@@ -1,0 +1,10 @@
+.navBar {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  height: 7rem;
+  align-items: center;
+  padding: 0 10rem;
+  /* background-color:#4b6285 ; */
+  border-radius: 0.7rem;
+  margin-top:2rem;
+}
