@@ -10,7 +10,7 @@ const typeOptions = {
   isWishList: "My Wishlist",
 };
 
-function BookList({ books = [], isLoading, type }) {
+function BookList({ books = [], isLoading, type, query }) {
   const { isBookRead, isBookWished } = useList();
   const [showNotFound, setShowNotFound] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
@@ -25,7 +25,7 @@ function BookList({ books = [], isLoading, type }) {
     }
     // 2. Dopo che il caricamento è finito (isLoading è false) e una ricerca è stata avviata:
     else if (searchInitiated) {
-      if (books.length === 0) {
+      if (type === "isHomepage" && query.length >= 3 && books.length === 0) {
         // Se non ci sono risultati, mostra il messaggio "non trovato" dopo un breve ritardo
         setHasSearched(true); // Imposta hasSearched a true perché la ricerca è stata effettuata
         const timer = setTimeout(() => {
@@ -69,7 +69,10 @@ function BookList({ books = [], isLoading, type }) {
               })}
             </div>
           ) : (
-            showNotFound && hasSearched && <p className="text-neutral-400 text-[2rem]">Books not found</p>
+            showNotFound &&
+            hasSearched && (
+              <p className="text-neutral-400 text-[2rem]">Books not found</p>
+            )
           )}
         </div>
       )}

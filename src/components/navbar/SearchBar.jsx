@@ -3,8 +3,10 @@ import { useState, useRef, useEffect } from "react";
 import { useBooks } from "../../context/BookContext";
 import { useNavigate } from "react-router";
 
-function SearchBar({ type }) {
-  const [query, setQuery] = useState("");
+function SearchBar({ type, query, setQuery }) {
+  useEffect(()=>{
+    console.log('useEFfect triggered')
+  },[query])
   const inputElement = useRef(null);
   const { getBooks } = useBooks();
   const navigate = useNavigate();
