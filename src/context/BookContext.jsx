@@ -9,7 +9,6 @@ import {
 import { useList } from "./ListContext";
 const BookContext = createContext();
 
-// const apiKey = `AIzaSyADchramyQEI5GUwGMsK-N48t3uDCumqOM`;
 const apiKey = import.meta.env.VITE_API_KEY;
 console.log('ciao api',apiKey)
 const url = `https://www.googleapis.com/books/v1/volumes?q=`;
