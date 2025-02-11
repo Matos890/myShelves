@@ -9,7 +9,6 @@ const fakeBooks = {
   plot: "Marquez descrive la vita di tre generazioni nel paese immaginario di Macondo",
 };
 // import SearchBook from "../navbar/SearchBook";
-const apiKey = `AIzaSyADchramyQEI5GUwGMsK-N48t3uDCumqOM`;
 const url = `https://www.googleapis.com/books/v1/volumes?q=`;
 const urlISBN = `https://www.googleapis.com/books/v1/volumes?q=isbn:`;
 
