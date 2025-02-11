@@ -1,0 +1,8 @@
+{
+  "plugins": ["prettier-plugin-tailwindcss"],
+  "tailwindStylesheet": "./resources/css/app.css",
+  "printWidth": 80,
+  "proseWrap": "always",
+  "trailingComma": "all"
+}
+

@@ -8,7 +8,7 @@ function Homepage() {
   
   return (
     <>
-      <Navbar />
+      <Navbar type={'isHomepage'} />
       <BookList books={books} isLoading={isLoading}  type={'isHomepage'}/>
     </>
   );

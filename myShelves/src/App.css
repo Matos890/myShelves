@@ -1,3 +1,4 @@
+@import "tailwindcss";
 html {
   /* font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; */
   /* font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; */
@@ -6,13 +7,12 @@ html {
   font-weight: 300;
   word-break: normal;
   hyphens: auto;
-}
-* {
-  margin: 0;
-  padding: 0;
+  color:white;
   font-size: 10px;
-  color: white;
 }
+/* * {
+  font-size: 10px;
+} */
 h2 {
   font-size: 2.3rem;
   text-transform: capitalize;
@@ -22,8 +22,9 @@ h2 {
   font-size: 10px;
 }
 body {
-  background-color: #333;
+  background-color: #262626;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 .logo {
   display: flex;
@@ -35,6 +36,6 @@ body {
   position: absolute;
   height: 100%;
 }
-a{
+a {
   text-decoration: none;
 }

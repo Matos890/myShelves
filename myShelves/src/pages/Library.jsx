@@ -5,7 +5,7 @@ function Library() {
   const { readBooks, isLoading } = useList();
   return (
     <>
-      <Navbar />
+      <Navbar type={'isLibrary'} />
       <BookList books={readBooks} isLoading={isLoading} type={'isLibrary'}/>
     </>
   );

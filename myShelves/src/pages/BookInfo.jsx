@@ -23,10 +23,17 @@ function BookInfo() {
     isLoading,
   } = useBooks();
 
+  const fakeBooks = {
+    title: "Unknown Title",
+    author: "Unknown Author",
+    cover: "/Default_book_cover.webp",
+    plot: "Unknown Plot",
+  };
   useEffect(() => {
     findBookInfo(id); // Chiamata all'API solo quando `id` cambia
   }, [id]);
-  const { addBookRead, addBookWished, removeBookRead, removeBookWished } = useList();
+  const { addBookRead, addBookWished, removeBookRead, removeBookWished } =
+    useList();
   console.log("ei", !isLoading ? currentBook?.volumeInfo : "isloading");
   const title = currentBook?.volumeInfo?.title;
   const tagRegExp = new RegExp("<s*[^>]*>", "g");
@@ -35,6 +42,7 @@ function BookInfo() {
   const cover = currentBook?.volumeInfo?.imageLinks?.thumbnail;
   const author = currentBook?.volumeInfo?.authors;
   const pageCount = currentBook?.volumeInfo?.pageCount;
+  const publisher = currentBook?.volumeInfo?.publisher;
 
   let { isBookRead, isBookWished } = useList();
 
@@ -51,10 +59,10 @@ function BookInfo() {
 
     addBookRead(bookRead);
   }
-  function onhandleRemoveRead(){
+  function onhandleRemoveRead() {
     removeBookRead(id);
   }
-  function onhandleRemoveWished(){
+  function onhandleRemoveWished() {
     removeBookWished(id);
   }
   function onhandleAddWished() {
@@ -69,50 +77,94 @@ function BookInfo() {
   }
   return (
     <>
-      <Navbar />
+      <Navbar type={'isBookInfo'} />
 
       {!currentBook || isLoading ? (
+
+        < div className="flex flex-col items-center mt-28 w-[90%]">
         <Loading />
+        </div>
       ) : (
-        <div className={styles.BookInfoBox}>
-          <div className={styles.bookInfoContainer}>
-            <div className={styles.coverTitleWriter}>
-              <div className={styles.cover}>
-                <img src={`${cover}`} alt="" />
+        <div className="flex justify-center">
+          <div className="flex min-h-fit  w-[80%] md:w-[80%] mt-[10rem] lg:flex-row flex-col items-center">
+            <div className="flex flex-col w-full md:w-[50%] items-center">
+              <div className="rounded-tr-[6%] rounded-br-[6%] rounded-bl-[0/4%] flex justify-center relative w-full h-fit mb-[2rem]">
+                <img
+                  className=" w-[25rem] h-full rounded-tr-[6%] rounded-br-[6%] rounded-bl-[0/4%]  "
+                  src={cover || fakeBooks.cover}
+                  alt=""
+                />
+
                 {}
               </div>
-              <div className={styles.buttons}>
+              <div className="flex justify-end gap-[1rem] ">
                 {
                   <ButtonCircles
-                    onClick={ read ===true ? onhandleRemoveRead : onhandleAddRead}
-                    color={read === true ? "active" : "inactive"}
-                  >
+                    onClick={
+                      read === true ? onhandleRemoveRead : onhandleAddRead
+                    }
+                    color={read === true ? "active" : "inactive"}>
                     &#43;
                   </ButtonCircles>
                 }
                 <ButtonCircles
-                  onClick={wished === true ? onhandleRemoveWished :onhandleAddWished}
-                  color={wished === true ? "active" : "inactive"}
-                >
+                  onClick={
+                    wished === true ? onhandleRemoveWished : onhandleAddWished
+                  }
+                  color={wished === true ? "active" : "inactive"}>
                   &#x2764;
                 </ButtonCircles>
               </div>
             </div>
-            <div className={styles.bookDescriptionEditorPages}>
-              <div className={styles.titleWriter}>
-                <h1>{title}</h1>
-                <Link to={`/bookInfo/author/${author}`}>
-                  <h3 className={styles.authorName}>{author}</h3>
-                </Link>
+            <div className="flex flex-col relative xl:w-[50%] md:w-[70%] sm:gap-[2rem] gap-[.5rem] sm:w-[100%]">
+              <div className="flex flex-col ">
+                <h1 className="sm:text-[3.5rem] text-[2.8rem] text-neutral-300 font-semibold ">
+                  {title}
+                </h1>
+                <div className="flex gap-2">
+                  {author?.map((auth, i) => {
+                    return (
+                      <Link
+                        className="w-fit inline-block"
+                        to={`/bookInfo/author/${auth}`}>
+                        <h3
+                          className="sm:text-[2.2rem]  text-[1.8rem]
+                   font-light text-neutral-500 hover:text-blue-300">
+                          {auth || fakeBooks.author}
+
+                          {i !== author.length - 1 && ","}
+                        </h3>
+                      </Link>
+                    );
+                  })}
+                </div>
+                <p className="text-[1.3rem] text-rose-100">
+                  More info on{" "}
+                  {author?.map((auth, i) => (
+                    <a
+                      className="hover:text-blue-200"
+                      target="_blank"
+                      href={`https://wikipedia.org/wiki/${auth}`}>
+                      {auth}
+                      {i !== author.length - 1 && ", "}
+                    </a>
+                  ))}
+                </p>
               </div>
-              <div className={styles.description}>
-                <p className={styles.paragraphDescription}>{description}</p>
+              <div className="text-[1.8rem] text-neutral-300">
+                <p className="sm:text-[1.8rem] text-[1.5rem]">{description}</p>
               </div>
 
-              <div className={styles.pages}>
-                <p className={styles.pageCount}>Pages: {pageCount}.</p>
+              <div className="sm:text-[1.5rem] text-[1.2rem] text-neutral-500">
+                <p className="sm:text-[1.5rem] text-[1.2rem] font-light">
+                  Pages: {pageCount}.
+                </p>
               </div>
-              <div className={styles.editor}></div>
+              <div className={styles.editor}>
+                <p className="sm:text-[1.5rem] text-[1.2rem] text-neutral-500">
+                  this edition is published by {publisher}
+                </p>
+              </div>
             </div>
           </div>
         </div>

@@ -14,14 +14,17 @@
 .buttonPlusAdd span {
   font-size: 2rem;
 }
-.inactive span:hover {
+/* .inactive span:hover {
 
   font-size: 2rem;
   color:black;
+} */
+ .active   span:nth-child(1){
+color:#ffa2a2;
 }
- .active   span{
-color:aqua;
+ .active   span:nth-child(2){
+color:#ffa2a2;
 }
- .inactive span {
+ /* .inactive span {
 color:white;
-}
+} */

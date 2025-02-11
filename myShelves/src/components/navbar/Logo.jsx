@@ -3,9 +3,9 @@ import { Link } from "react-router";
 import styles from "./Navbar.module.css";
 function Logo() {
     return (
-        <div >
+        <div className=" flex w-full justify-center h-[5rem] self-center">
           <img
-            className={styles.logoImg}
+            className='md:px-[10rem] '
             src="/logos2-01.png"
             alt=""
           />

@@ -3,13 +3,14 @@ import styles from "./mainSection/BookList.module.css";
 import { Link } from "react-router";
 import { useList } from "../context/ListContext";
 const fakeBooks = {
-  title: "Cent'anni di solitudine",
-  author: "Gabriel Garcia Marquez",
-  cover: "/100AnniDiSolitudine.jpg",
-  plot: "Marquez descrive la vita di tre generazioni nel paese immaginario di Macondo",
+  title: "Unknown Title",
+  author: "Unknown Author",
+  cover: "/Default_book_cover.webp",
+  plot: "Unknown Plot",
 };
 function BookItem({ book, type, read, wished }) {
-  const { addBookRead, addBookWished, removeBookRead, removeBookWished } = useList();
+  const { addBookRead, addBookWished, removeBookRead, removeBookWished } =
+    useList();
   const title = book.volumeInfo?.title || book.title;
   const id = book.id || book.id;
   const authors = book.volumeInfo?.authors || book.authors;
@@ -42,43 +43,62 @@ function BookItem({ book, type, read, wished }) {
     console.log("ciao");
     console.log("whished", bookWished);
   }
-  function onhandleRemoveRead(){
+  function onhandleRemoveRead() {
     removeBookRead(id);
   }
-  function onhandleRemoveWished(){
+  function onhandleRemoveWished() {
     removeBookWished(id);
   }
   return (
-    <div className={styles.bookItem}>
-      <div className={styles.containerCoverBook}>
-        <img src={`${cover || fakeBooks.cover}`} alt="" />
-        <div className={styles.buttons}>
+    <div className="flex md:p-[2rem] border-[0.3px] border-neutral-600 duration-700 h-fit gap-[3rem] hover:bg-neutral-700 ">
+      <div className="h-fit w-fit flex flex-col gap-5">
+        <Link to={`/bookInfo/${id}`}>
+          <img
+            className="rounded-[.rem] h-[22rem]"
+            src={`${cover || fakeBooks.cover}`}
+            alt=""
+          />
+        </Link>
+        <div className="flex justify-end gap-[1rem]">
           <ButtonCircles
             color={read === true ? "active" : "inactive"}
-            onClick={read === true? onhandleRemoveRead:onhandleAddRead}
-          >
+            onClick={read === true ? onhandleRemoveRead : onhandleAddRead}>
             &#43;
           </ButtonCircles>
-            <ButtonCircles
-              color={wished === true ? "active" : "inactive"}
-              onClick={wished === true ? onhandleRemoveWished: onhandleAddWished}
-            >
-              &#x2764;
-            </ButtonCircles>
+          <ButtonCircles
+            color={wished === true ? "active" : "inactive"}
+            onClick={
+              wished === true ? onhandleRemoveWished : onhandleAddWished
+            }>
+            &#x2764;
+          </ButtonCircles>
         </div>
       </div>
-      <div className={styles.containerInfo}>
+      <div className="mt-[2rem] w-[70%]">
         <Link to={`/bookInfo/${id}`}>
           <div className={styles.containerTitle}>
-            <h6 className={styles.titleBook}>{title}</h6>
+            <h6 className=" text-[1.8rem] md:text-[2rem] text-neutral-300 font-semibold hover:text-red-300 duration-750">
+              {title}
+            </h6>
           </div>
         </Link>
-          <div className={styles.containerAuthor}>
-        <Link to={`/bookInfo/author/${authors}`}>
-            <p className={styles.nameAuthor}> {authors || fakeBooks.author}</p>
-        </Link>
-        <p className={styles.description}>{description}</p>
+        <div className="mt-[0.3rem] text-[2.4rem]">
+          < div className="flex gap-1">
+          {authors?.map((auth, i) => (
+            <Link to={`/bookInfo/author/${auth}`}>
+              <p className="text-[1.5rem] text-neutral-500 inline-block  hover:text-blue-300 duration-750">
+                {auth || fakeBooks.author}
+                {i != authors.length - 1 && ", "}
+              </p>
+            </Link>
+          ))}
           </div>
+          <Link to={`/bookInfo/${id}`}>
+            <p className="text-[1.5rem] md:text-[1.8rem] max-h-[11rem] overflow-hidden text-ellipsis pt-[1rem] text-neutral-300">
+              {description}
+            </p>
+          </Link>
+        </div>
       </div>
     </div>
   );

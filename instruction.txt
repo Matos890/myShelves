@@ -9,3 +9,55 @@ ONADDREAD/ONADDWISHED sono uguali ad esempio.
 5.mettere più loadings...
 6.Devo risolvere il problema della search bar. Fare la ricerca in un altro modo.
 ripensarla.
+
+
+
+// useEffect(() => {
+//     const handleKeyDown = (e) => {
+//       if (e.key === "Enter" && document.activeElement === inputElement.current) {
+//         e.preventDefault(); // Previene comportamenti predefiniti
+//         if (query.trim() !== "") {
+//           getBooks(query); // Effettua la ricerca quando premi Invio
+//         }
+//       }
+//     };
+
+//     document.addEventListener("keydown", handleKeyDown);
+//     return () => document.removeEventListener("keydown", handleKeyDown);
+//   }, [query, getBooks]);
+
+
+
+
+////
+
+
+
+    <div className="relative w-[80%]">
+      <input
+        type="search"
+        value={query}
+        placeholder="Search books..."
+        onChange={(e) => setQuery(e.target.value)}
+        className="border-neutral-400 text-neutral-300 border-1 relative rounded-2xl self-center focus:ring-0 ring-offset-[0.5px] focus:ring-neutral-800 text-[2rem] py-4 px-10 text-3xl bg-neutral-800 w-full focus:outline-none"
+        ref={inputElement}
+      />
+      <div class="">
+        <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+          <svg
+            class="w-5 h-5 text-neutral-300 "
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 20 20">
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+            />
+          </svg>
+        </div>
+      </div>
+    </div>

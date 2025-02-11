@@ -6,7 +6,7 @@ function WishList() {
   const { wishedBooks, isLoading } = useList();
   return (
     <>
-      <Navbar />
+      <Navbar type={'isWishList'} />
       <BookList books={wishedBooks} type={'isWishList'} />
     </>
   );
